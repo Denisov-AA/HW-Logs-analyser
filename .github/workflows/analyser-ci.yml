@@ -25,6 +25,7 @@ jobs:
 
       - name: Lint with Ruff
         run: |
+          poetry install
           ruff check
 
       - name: Format with Black
