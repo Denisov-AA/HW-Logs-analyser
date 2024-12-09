@@ -105,8 +105,8 @@ def parse(app_config: dict, latest_log: LatestLog) -> Generator:
     :param latest_log: LatestLog namedtuple
     :return: None if got a parse error, (url, request_time) otherwise
     """
-    openfunc = gzip.open if latest_log.ext == ".gz" else open
-    with openfunc(
+    open_func = gzip.open if latest_log.ext == ".gz" else open
+    with open_func(
         os.path.join(app_config["LOG_DIR"], latest_log.path), "rt", encoding="utf-8"
     ) as fp:
         for line in fp:
