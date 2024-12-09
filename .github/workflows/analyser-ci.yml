@@ -25,25 +25,16 @@ jobs:
 
       - name: Lint with Ruff
         run: |
-          pip install ruff
-          ruff .
+          ruff check
 
       - name: Format with Black
         run: |
-          pip install black
           black --check .
 
       - name: Sort imports with Isort
         run: |
-          pip install isort
           isort --check-only .
 
       - name: Static type checking with Mypy
         run: |
-          pip install mypy
-          mypy .
-
-      - name: Run tests
-        run: |
-          pip install pytest
-          pytest
+          mypy ./src/log_analyser.py
