@@ -39,3 +39,14 @@ jobs:
       - name: Static type checking with Mypy
         run: |
           mypy ./src/log_analyser.py
+
+      - name: Run LogAnalyser
+        run: |
+          cd src/
+          python log_analyser.py
+
+      - name: Upload results
+        uses: actions/upload-artifact@v3
+        with:
+          name: analyse-results
+          path: ./reports

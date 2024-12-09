@@ -41,7 +41,7 @@ LOG_LINE_REGEX = (
     + r"{HTTP_X_REQUEST_ID}{S}{HTTP_X_RB_USER}{S}{REQUEST_TIME}$"
 ).format(**log_line_re_dict)
 
-CONFIG_DIR = "../config"
+CONFIG_DIR = "../config/"
 
 REPORT_FILE_TEMPLATE = r"report-%Y.%m.%d.html"
 
