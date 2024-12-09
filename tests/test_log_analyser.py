@@ -31,12 +31,12 @@ class LogAnalyzerTest(unittest.TestCase):
 
     def test_bz2_log_handling(self):
         config = la.read_config(self.config_path)
-        config["LOG_DIR"] = "./"
+        config["LOG_DIR"] = "./bz"
         self.assertEqual(la.find_latest_log(config)[0], "")
 
     def test_plain_log_handling(self):
         config = la.read_config(self.config_path)
-        config["LOG_DIR"] = "./"
+        config["LOG_DIR"] = "./plain"
         self.assertEqual(
             la.find_latest_log(config),
             ("nginx-access-ui.log-20170630", "", datetime.date(2017, 6, 30)),
@@ -54,7 +54,7 @@ class LogAnalyzerTest(unittest.TestCase):
 
     def test_incorrect_log_data(self):
         config = la.read_config(self.config_path)
-        config["LOG_DIR"] = "./"
+        config["LOG_DIR"] = "./plain"
         logfile = "nginx-access-ui.log-20170630"
         logging.basicConfig(
             filename=config.get("LOG_FILE", None),

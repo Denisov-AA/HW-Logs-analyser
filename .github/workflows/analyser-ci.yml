@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  lint-and-test:
+  Code-checks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -39,6 +39,11 @@ jobs:
       - name: Static type checking with Mypy
         run: |
           mypy ./src/log_analyser.py
+
+  Analysing-log:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
 
       - name: Run LogAnalyser
         run: |
