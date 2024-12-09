@@ -52,7 +52,7 @@ class LogAnalyzerTest(unittest.TestCase):
         logging.basicConfig(filename=config.get('LOG_FILE', None), level=logging.DEBUG,
                             format='[%(asctime)s] %(levelname).1s %(message)s', datefmt='%Y.%m.%d %H:%M:%S')
 
-        request_data = la.collect_request_data(config, la.LatestLog(logfile, '', datetime.date(2017, 6, 30)), la.parse)
+        la.collect_request_data(config, la.LatestLog(logfile, '', datetime.date(2017, 6, 30)), la.parse)
 
         with open(config['LOG_FILE'], "r") as fp:
             self.assertIn(f"Maximum error rate reached in {logfile}", fp.readlines()[-1])
