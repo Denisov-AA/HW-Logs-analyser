@@ -12,7 +12,7 @@ CONFIG_SAMPLE = {
     "TEMPLATE": "../reports/report.html",
     "MAX_ERROR_RATE": 0.8,
     "LOG_FILE": "log_analyzer.log",
-    "LOG_LEVEL": "DEBUG"
+    "LOG_LEVEL": "DEBUG",
 }
 
 
