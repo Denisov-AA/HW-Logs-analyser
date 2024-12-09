@@ -3,18 +3,16 @@
 #                     '"$http_user_agent" "$http_x_forwarded_for" "$http_X_REQUEST_ID" "$http_X_RB_USER" '
 #                     '$request_time';
 
-import os
-import logging
+import argparse
 import gzip
-import re
 import json
+import logging
+import os
+import re
+from collections import OrderedDict, namedtuple
 from datetime import date, datetime
 from os import PathLike
-
 from string import Template
-from collections import OrderedDict, namedtuple
-
-import argparse
 
 parser = argparse.ArgumentParser(description="Log analyzer")
 parser.add_argument("--config", dest="config_path")

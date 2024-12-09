@@ -1,9 +1,10 @@
-import unittest
-import src.log_analyser as la
-import sys
-import os
-import logging
 import datetime
+import logging
+import os
+import sys
+import unittest
+
+import src.log_analyser as la
 
 CONFIG_SAMPLE = {
     "REPORT_SIZE": 2000,
