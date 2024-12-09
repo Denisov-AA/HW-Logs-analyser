@@ -6,6 +6,7 @@ description = "This is a training project. Run it at your own risk."
 authors = ["Andrey Denisov <andrey.denisov@indeed-id.com>"]
 license = "MIT"
 readme = "README.md"
+requires = ["unittest"]
 
 [tool.poetry.dependencies]
 python = "^3.12"
