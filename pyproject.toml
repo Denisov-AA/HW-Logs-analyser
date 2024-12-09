@@ -1,5 +1,6 @@
 [tool.poetry]
 name = "hw-logs-analyser"
+package-mode = false
 version = "0.1.0"
 description = "This is a training project. Run it at your own risk."
 authors = ["Andrey Denisov <andrey.denisov@indeed-id.com>"]
