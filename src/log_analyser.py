@@ -13,6 +13,7 @@ from collections import OrderedDict, namedtuple
 from datetime import date, datetime
 from os import PathLike
 from string import Template
+from typing import Generator
 
 parser = argparse.ArgumentParser(description="Log analyzer")
 parser.add_argument("--config", dest="config_path")
@@ -58,7 +59,7 @@ LatestLog = namedtuple("LatestLog", "path ext max_date")
 RequestData = namedtuple("RequestData", "urls time_total count_total")
 
 
-def find_latest_log(app_config: dict) -> namedtuple:
+def find_latest_log(app_config: dict) -> LatestLog:
     """
     Find latest log file and check if it's already analyzed
 
@@ -96,7 +97,7 @@ def find_latest_log(app_config: dict) -> namedtuple:
     return LatestLog(log_path, log_ext, max_date)
 
 
-def parse(app_config: dict, latest_log: namedtuple) -> tuple:
+def parse(app_config: dict, latest_log: LatestLog) -> Generator:
     """
     Iterate log file and yield parsed url and request_time
 
