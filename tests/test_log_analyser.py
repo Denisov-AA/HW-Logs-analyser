@@ -62,7 +62,7 @@ class LogAnalyzerTest(unittest.TestCase):
             level=logging.DEBUG,
             format="[%(asctime)s] %(levelname).1s %(message)s",
             datefmt="%Y.%m.%d %H:%M:%S",
-            force=True
+            force=True,
         )
         la.collect_request_data(
             config, la.LatestLog(logfile, "", datetime.date(2017, 6, 30)), la.parse
