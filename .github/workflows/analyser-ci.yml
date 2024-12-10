@@ -60,6 +60,7 @@ jobs:
 
       - name: Run unittests
         run: |
+          cat ../config/log_analyser.json
           python -m unittest discover tests/
     
 
