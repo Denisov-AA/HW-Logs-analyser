@@ -1,0 +1,7 @@
+{
+    "REPORT_SIZE": 2000,
+    "REPORT_DIR": "./reports",
+    "MAX_ERROR_RATE": 0.8,
+    "LOG_FILE":"log_analyzer.log",
+    "LOG_LEVEL":"DEBUG"
+}

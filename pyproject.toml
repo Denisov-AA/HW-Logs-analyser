@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "hw-logs-analyser"
+package-mode = false
+version = "0.1.0"
+description = "This is a training project. Run it at your own risk."
+authors = ["Andrey Denisov <andrey.denisov@indeed-id.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pre-commit = "^4.0.1"
+ruff = "^0.8.2"
+black = "^24.10.0"
+flake8 = "^7.1.1"
+isort = "^5.13.2"
+mypy = "^1.13.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F"]
+ignore = ["E501", "F401"]
