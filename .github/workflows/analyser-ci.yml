@@ -63,7 +63,7 @@ jobs:
           pwd
           cd tests
           cat ../config/log_analyser.json
-          python -m unittest discover tests/
+          python -m unittest discover -s tests/
     
 
   Analysing-log:
