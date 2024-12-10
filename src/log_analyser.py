@@ -41,15 +41,15 @@ LOG_LINE_REGEX = (
     + r"{HTTP_X_REQUEST_ID}{S}{HTTP_X_RB_USER}{S}{REQUEST_TIME}$"
 ).format(**log_line_re_dict)
 
-CONFIG_DIR = "../config/"
+CONFIG_DIR = "./config/"
 
 REPORT_FILE_TEMPLATE = r"report-%Y.%m.%d.html"
 
 config = {
     "REPORT_SIZE": 1000,
-    "REPORT_DIR": "../reports",
-    "LOG_DIR": "../log",
-    "TEMPLATE": "../reports/report.html",
+    "REPORT_DIR": "./reports",
+    "LOG_DIR": "./log",
+    "TEMPLATE": "./reports/report.html",
     "MAX_ERROR_RATE": 0.8,
     "LOG_FILE": "log_analyzer.log",
     "LOG_LEVEL": "DEBUG",
@@ -196,7 +196,7 @@ def collect_request_data(app_config, latest_log, parse_func):
     return RequestData(urls, time_total, count_total)
 
 
-def calc_stats(request_data):
+def calc_stats(request_data) -> list:
     """
     :param request_data: namedtuple of (urls, time_total, count_total)
     :return: JS-ready statistics for the HTML template

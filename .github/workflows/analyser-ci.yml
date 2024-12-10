@@ -42,7 +42,6 @@ jobs:
 
   Run-tests:
     runs-on: ubuntu-latest
-    needs: [Code-checks]
     steps:
       - uses: actions/checkout@v3
 
@@ -69,7 +68,7 @@ jobs:
 
   Analysing-log:
     runs-on: ubuntu-latest
-    needs: [Code-checks, Run-tests]
+    needs: [Run-tests]
     steps:
       - uses: actions/checkout@v3
 
@@ -87,8 +86,7 @@ jobs:
 
       - name: Run LogAnalyser
         run: |
-          cd src/
-          python log_analyser.py
+          python src/log_analyser.py
 
       - name: Upload results
         uses: actions/upload-artifact@v4

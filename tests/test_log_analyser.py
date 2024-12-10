@@ -8,9 +8,9 @@ import src.log_analyser as la
 
 CONFIG_SAMPLE = {
     "REPORT_SIZE": 2000,
-    "REPORT_DIR": "../reports",
-    "LOG_DIR": "../log",
-    "TEMPLATE": "../reports/report.html",
+    "REPORT_DIR": "./reports",
+    "LOG_DIR": "./log",
+    "TEMPLATE": "./reports/report.html",
     "MAX_ERROR_RATE": 0.8,
     "LOG_FILE": "log_analyzer.log",
     "LOG_LEVEL": "DEBUG",
@@ -18,7 +18,7 @@ CONFIG_SAMPLE = {
 
 
 class LogAnalyzerTest(unittest.TestCase):
-    config_path = "../config/log_analyser.json"
+    config_path = "./config/log_analyser.json"
 
     def test_good_config_file(self):
         sys.argv += ["--config", "config.json"]
@@ -26,17 +26,17 @@ class LogAnalyzerTest(unittest.TestCase):
 
     def test_no_log_found(self):
         config = la.read_config(self.config_path)
-        config["LOG_DIR"] = "../src"
+        config["LOG_DIR"] = "./src"
         self.assertEqual(la.find_latest_log(config)[0], "")
 
     def test_bz2_log_handling(self):
         config = la.read_config(self.config_path)
-        config["LOG_DIR"] = "./bz"
+        config["LOG_DIR"] = "./tests/bz"
         self.assertEqual(la.find_latest_log(config)[0], "")
 
     def test_plain_log_handling(self):
         config = la.read_config(self.config_path)
-        config["LOG_DIR"] = "./plain"
+        config["LOG_DIR"] = "./tests/plain"
         self.assertEqual(
             la.find_latest_log(config),
             ("nginx-access-ui.log-20170630", "", datetime.date(2017, 6, 30)),
@@ -44,7 +44,7 @@ class LogAnalyzerTest(unittest.TestCase):
 
     def test_gz_log_handling(self):
         config = la.read_config(self.config_path)
-        config["LOG_DIR"] = "../log/"
+        config["LOG_DIR"] = "./log/"
         self.assertEqual(
             la.find_latest_log(config),
             la.LatestLog(
@@ -54,7 +54,7 @@ class LogAnalyzerTest(unittest.TestCase):
 
     def test_incorrect_log_data(self):
         config = la.read_config(self.config_path)
-        config["LOG_DIR"] = "./plain"
+        config["LOG_DIR"] = "./tests/plain"
         logfile = "nginx-access-ui.log-20170630"
         logging.basicConfig(
             filename=config.get("LOG_FILE", None),
@@ -67,7 +67,7 @@ class LogAnalyzerTest(unittest.TestCase):
             config, la.LatestLog(logfile, "", datetime.date(2017, 6, 30)), la.parse
         )
 
-        with open(config["LOG_FILE"], "r") as fp:
+        with open(config["LOG_FILE"], "r+") as fp:
             self.assertIn(
                 f"Maximum error rate reached in {logfile}", fp.readlines()[-1]
             )
