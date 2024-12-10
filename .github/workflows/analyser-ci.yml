@@ -60,7 +60,7 @@ jobs:
 
       - name: Run unittests
         run: |
-          python -m unittests discover tests/
+          python -m unittest discover tests/
     
 
   Analysing-log:
