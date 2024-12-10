@@ -61,6 +61,8 @@ jobs:
       - name: Run unittests
         run: |
           tree
+          pwd
+          cd /tests
           cat ../config/log_analyser.json
           python -m unittest discover tests/
     
