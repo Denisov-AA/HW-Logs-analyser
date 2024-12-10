@@ -58,16 +58,17 @@ class LogAnalyzerTest(unittest.TestCase):
         logfile = "nginx-access-ui.log-20170630"
         logging.basicConfig(
             filename=config.get("LOG_FILE", None),
+            filemode="w",
             level=logging.DEBUG,
             format="[%(asctime)s] %(levelname).1s %(message)s",
             datefmt="%Y.%m.%d %H:%M:%S",
+            force=True
         )
-
         la.collect_request_data(
             config, la.LatestLog(logfile, "", datetime.date(2017, 6, 30)), la.parse
         )
 
-        with open(config["LOG_FILE"], "r+") as fp:
+        with open(config["LOG_FILE"], "r") as fp:
             self.assertIn(
                 f"Maximum error rate reached in {logfile}", fp.readlines()[-1]
             )
