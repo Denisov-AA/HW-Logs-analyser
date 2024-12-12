@@ -106,17 +106,27 @@ def parse(app_config: dict, latest_log: LatestLog) -> Generator:
     :return: None if got a parse error, (url, request_time) otherwise
     """
     open_func = gzip.open if latest_log.ext == ".gz" else open
-    with open_func(
-        os.path.join(app_config["LOG_DIR"], latest_log.path), "rt", encoding="utf-8"
-    ) as fp:
-        for line in fp:
-            match = re.search(LOG_LINE_REGEX, line)
-            if match:
-                url = match.group("url")
-                request_time = float(match.group("request_time"))
-                yield url, request_time
-            else:
-                yield
+    try:
+        with open_func(
+            os.path.join(app_config["LOG_DIR"], latest_log.path), "rt", encoding="utf-8"
+        ) as fp:
+            for line in fp:
+                match = re.search(LOG_LINE_REGEX, line)
+                if match:
+                    url = match.group("url")
+                    request_time = float(match.group("request_time"))
+                    yield url, request_time
+                else:
+                    yield
+    except (
+        FileNotFoundError,
+        PermissionError,
+        IsADirectoryError,
+        IOError,
+        UnicodeDecodeError,
+        ValueError,
+    ) as error:
+        logging.error(error)
 
 
 def read_config(config_path: str | PathLike):
@@ -278,7 +288,7 @@ def main():
 
     latest_log = find_latest_log(app_config)
     if not latest_log.path:
-        raise Exception("Log file not found")
+        raise FileNotFoundError("Log file not found")
 
     report_path = os.path.join(
         app_config["REPORT_DIR"], latest_log.max_date.strftime(REPORT_FILE_TEMPLATE)
@@ -302,5 +312,5 @@ def main():
 if __name__ == "__main__":
     try:
         main()
-    except BaseException as e:
+    except (BaseException, KeyboardInterrupt) as e:
         logging.exception(e)
